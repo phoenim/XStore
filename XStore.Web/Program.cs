@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using XStore.Application.Interfaces.Context;
+using XStore.Application.Services.Users.Queries.GetRoles;
 using XStore.Application.Services.Users.Queries.GetUsers;
 using XStore.Presistance.Contexts;
 
@@ -11,6 +12,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DataBaseContext>(option => option.UseSqlServer(connectionStr));
 builder.Services.AddScoped<IDataBaseContext, DataBaseContext>();
 builder.Services.AddScoped<IGetUsersService, GetUsersService>();
+builder.Services.AddScoped<IGetRolesService, GetRolesService>();
 
 var app = builder.Build();
 
