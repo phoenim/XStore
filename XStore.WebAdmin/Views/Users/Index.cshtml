@@ -41,8 +41,8 @@
                                                                 <td>@item.Email</td>
                                                                 <td>
                                                                     <button class="btn btn-info">ویرایش</button>
-                                                                    <a class="btn btn-danger">حذف</a>
-                                                                <button class="btn btn-warning" onclick="Remove('@item.Id')">غیر فعال</button>
+                                                                    <a class="btn btn-danger" asp-action="Remove" asp-route-id="@item.Id">حذف</a>
+                                                                    <a class="btn btn-warning" asp-action="ChangeStatus" asp-route-id="@item.Id">غیر فعال</a>
                                                                 </td>
                                                             </tr>
                                                         }

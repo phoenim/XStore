@@ -15,6 +15,7 @@ namespace XStore.Domain.Entities.Users
         public string FullName { get; set; }
         public string Email { get; set; }
         public string password { get; set; }
+        public bool IsActived { get; set; }
 
         public ICollection<UserInRole> UserInRoles { get; set; }
     }

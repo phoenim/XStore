@@ -4,6 +4,7 @@ using XStore.Application.Services.Users.Queries.GetRoles;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using XStore.Application.Services.Users.Commands.RegisterUser;
 using XStore.Application.Services.Users.Commands.RemoveUser;
+using XStore.Application.Services.Users.Commands.StatusChangeUser;
 
 namespace XStore.WebAdmin.Controllers
 {
@@ -13,16 +14,20 @@ namespace XStore.WebAdmin.Controllers
         private readonly IGetRolesService _getRolesService;
         private readonly IRegisterUserService _registerUserService;
         private readonly IRemoveUserService _removeUserService;
+        private readonly IStatusChangeUserService _statusChangeUserService;
+
 
         public UsersController(IGetUsersService getUsersService, 
                                IGetRolesService getRolesService,
                                IRegisterUserService registerUserService,
-                               IRemoveUserService removeUserService)
+                               IRemoveUserService removeUserService,
+                               IStatusChangeUserService statusChangeUserService)
         {
             _getUsersService = getUsersService;
             _getRolesService = getRolesService;
             _registerUserService = registerUserService;
             _removeUserService = removeUserService;
+            _statusChangeUserService = statusChangeUserService;
         }
 
         public IActionResult Index(string searchKey, int page =1)
@@ -66,11 +71,17 @@ namespace XStore.WebAdmin.Controllers
 
 
 
-        [HttpPost]
         public IActionResult Remove(long id)
         {
-            //var result = _removeUserService.Execute(id);
-            return RedirectToAction("Index");
+            var result = _removeUserService.Execute(id);
+            return Json(result);
         }
+
+        public IActionResult ChangeStatus(long id, bool newStatus = false)
+        {
+            var result = _statusChangeUserService.Execute(id, newStatus);
+            return Json(result);
+        }
+
     }
 }
