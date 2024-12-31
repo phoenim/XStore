@@ -1,4 +1,4 @@
-﻿namespace Etar.Application.Services.Users.Commands.RegisterUser
+﻿namespace XStore.Application.Services.Users.Commands.RegisterUser
 {
     public class ResultRegisterUserDto
     {

@@ -17,17 +17,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{8E6975AC-7E0C-4C02-9038-CA3326597A8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XStore.Web", "XStore.Web\XStore.Web.csproj", "{5E0BB452-3000-4F19-B5BB-EF5E2D502C1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XStore.WebClient", "XStore.Web\XStore.WebClient.csproj", "{5E0BB452-3000-4F19-B5BB-EF5E2D502C1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XStore.Infrastracture", "Infrastracture\XStore.Infrastracture.csproj", "{859C2FEB-6007-4758-BF21-6085AA43A1E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XStore.Infrastracture", "Infrastracture\XStore.Infrastracture.csproj", "{859C2FEB-6007-4758-BF21-6085AA43A1E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XStore.Presistance", "Presistance\XStore.Presistance.csproj", "{48EE1C19-C6DF-4EE7-969D-EF6513E125EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XStore.Presistance", "Presistance\XStore.Presistance.csproj", "{48EE1C19-C6DF-4EE7-969D-EF6513E125EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XStore.Application", "XStore.Application\XStore.Application.csproj", "{8B60FC7C-F353-40E4-B955-3DB0190B6D9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XStore.Application", "XStore.Application\XStore.Application.csproj", "{8B60FC7C-F353-40E4-B955-3DB0190B6D9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XStore.Domain", "XStore.Domain\XStore.Domain.csproj", "{0802371C-12E3-48D1-83AF-3B2893E05383}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XStore.Domain", "XStore.Domain\XStore.Domain.csproj", "{0802371C-12E3-48D1-83AF-3B2893E05383}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XStore.Common", "XStore.Common\XStore.Common.csproj", "{6CF003B3-4BE9-4AC6-96F8-2A1453BC9C1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XStore.Common", "XStore.Common\XStore.Common.csproj", "{6CF003B3-4BE9-4AC6-96F8-2A1453BC9C1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XStore.WebAdmin", "XStore.WebAdmin\XStore.WebAdmin.csproj", "{FC9544D7-3216-44FA-90DB-C3FD378625DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{6CF003B3-4BE9-4AC6-96F8-2A1453BC9C1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CF003B3-4BE9-4AC6-96F8-2A1453BC9C1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CF003B3-4BE9-4AC6-96F8-2A1453BC9C1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC9544D7-3216-44FA-90DB-C3FD378625DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC9544D7-3216-44FA-90DB-C3FD378625DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC9544D7-3216-44FA-90DB-C3FD378625DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC9544D7-3216-44FA-90DB-C3FD378625DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +80,7 @@ Global
 		{8B60FC7C-F353-40E4-B955-3DB0190B6D9B} = {B9F3B3AD-4E96-48CF-87F1-A852CE2FB27B}
 		{0802371C-12E3-48D1-83AF-3B2893E05383} = {B9F3B3AD-4E96-48CF-87F1-A852CE2FB27B}
 		{6CF003B3-4BE9-4AC6-96F8-2A1453BC9C1A} = {898D0322-68EB-4E08-B98C-323E49E2371B}
+		{FC9544D7-3216-44FA-90DB-C3FD378625DA} = {8E6975AC-7E0C-4C02-9038-CA3326597A8C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FA14EB97-34FF-4F2E-B503-12BE87E63913}

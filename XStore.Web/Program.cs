@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using XStore.Application.Interfaces.Context;
+using XStore.Application.Services.Users.Commands.RegisterUser;
+using XStore.Application.Services.Users.Commands.RemoveUser;
 using XStore.Application.Services.Users.Queries.GetRoles;
 using XStore.Application.Services.Users.Queries.GetUsers;
 using XStore.Presistance.Contexts;
@@ -13,6 +15,8 @@ builder.Services.AddDbContext<DataBaseContext>(option => option.UseSqlServer(con
 builder.Services.AddScoped<IDataBaseContext, DataBaseContext>();
 builder.Services.AddScoped<IGetUsersService, GetUsersService>();
 builder.Services.AddScoped<IGetRolesService, GetRolesService>();
+builder.Services.AddScoped<IRegisterUserService, RegisterUserService>();
+builder.Services.AddScoped<IRemoveUserService, RemoveUserService>();
 
 var app = builder.Build();
 
@@ -35,9 +39,15 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.MapControllerRoute(
-    name: "areas",
-    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+//app.MapControllerRoute(
+//    name: "areas",
+//    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+app.MapAreaControllerRoute(
+    name: "MyAreaAdmin",
+    areaName: "Admin",
+    pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
+
 
 
 app.Run();

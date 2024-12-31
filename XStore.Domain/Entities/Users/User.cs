@@ -4,10 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XStore.Domain.Entities.Commons;
 
 namespace XStore.Domain.Entities.Users
 {
-    public class User
+    public class User : BaseEntity
     {
         [Key]
         public long Id { get; set; }
