@@ -53,6 +53,8 @@ namespace XStore.Application.Services.Users.Commands.RegisterUser
                         }
 
                         temp.UserInRoles = userInRoles;
+                        temp.password = request.Password;
+                        temp.IsActived = true;
 
                         _context.Users.Add(temp);
                         _context.SaveChanges();

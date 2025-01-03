@@ -70,13 +70,14 @@ namespace XStore.WebAdmin.Controllers
         }
 
 
-
+        [HttpPost]
         public IActionResult Remove(long id)
         {
             var result = _removeUserService.Execute(id);
             return Json(result);
         }
 
+   
         public IActionResult ChangeStatus(long id, bool newStatus = false)
         {
             var result = _statusChangeUserService.Execute(id, newStatus);

@@ -19,6 +19,8 @@ namespace XStore.Application.Services.Users.Commands.StatusChangeUser
             if (user != null)
             {
                 user.IsActived = newStatus;
+                _context.SaveChanges();
+
                 string status = (user.IsActived ? "فعال" : "غیر فعال");
                 string resultMessage = "شد" + status + "[" + user.FullName + "]وضعیت کاربر";
 

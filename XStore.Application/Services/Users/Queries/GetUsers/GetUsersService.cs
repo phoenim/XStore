@@ -30,6 +30,7 @@ namespace XStore.Application.Services.Users.Queries.GetUsers
                 Email = p.Email,
                 Name = p.FullName,
                 Id = p.Id,
+                IsActive = p.IsActived,
             }).ToList();
 
             return new ResultGetUserDto
