@@ -1,4 +1,5 @@
 ﻿using XStore.Application.Interfaces.Context;
+using XStore.Common;
 using XStore.Common.Dto;
 using XStore.Domain.Entities.Users;
 
@@ -32,6 +33,7 @@ namespace XStore.Application.Services.Users.Commands.RegisterUser
                 {
                     if (request.Password.Equals(request.RePassword))
                     {
+                        PasswordHasher passwordHasher = new PasswordHasher();
                         User temp = new User()
                         {
                             Email = request.Email,
@@ -53,7 +55,7 @@ namespace XStore.Application.Services.Users.Commands.RegisterUser
                         }
 
                         temp.UserInRoles = userInRoles;
-                        temp.password = request.Password;
+                        temp.password = passwordHasher.HashPassword(request.Password);
                         temp.IsActived = true;
 
                         _context.Users.Add(temp);
