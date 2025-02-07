@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using XStore.Domain.Entities.Products;
 
 namespace XStore.Application.Interfaces.Context
 {
@@ -14,6 +15,7 @@ namespace XStore.Application.Interfaces.Context
         DbSet<User> Users { get; set; }
         DbSet<Role> Roles { get; set; }
         DbSet<UserInRole> UserInRoles { get; set; }
+        DbSet<Category> Categories { get; set; }
 
         int SaveChanges(bool acceptAllChangesOnSuccess);
         int SaveChanges();

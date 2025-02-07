@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using XStore.Application.Interfaces.Context;
+using XStore.Application.Interfaces.FacadPatterns;
+using XStore.Application.Services.Products.Facad;
 using XStore.Application.Services.Users.Commands.RegisterUser;
 using XStore.Application.Services.Users.Commands.RemoveUser;
 using XStore.Application.Services.Users.Commands.StatusChangeUser;
@@ -19,6 +21,7 @@ builder.Services.AddScoped<IGetRolesService, GetRolesService>();
 builder.Services.AddScoped<IRegisterUserService, RegisterUserService>();
 builder.Services.AddScoped<IRemoveUserService, RemoveUserService>();
 builder.Services.AddScoped<IStatusChangeUserService, StatusChangeUserService>();
+builder.Services.AddScoped<IProductFacad, ProductFacad>();
 
 var app = builder.Build();
 
