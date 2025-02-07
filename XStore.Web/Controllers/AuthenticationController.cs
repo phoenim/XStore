@@ -118,5 +118,12 @@ namespace XStore.WebClient.Controllers
             return Json(signupResult);
         }
 
+        public IActionResult SignOut ()
+        {
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }
