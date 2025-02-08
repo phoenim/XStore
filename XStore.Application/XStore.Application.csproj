@@ -20,8 +20,4 @@
     <ProjectReference Include="..\XStore.Domain\XStore.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\Products\Queries\" />
-  </ItemGroup>
-
 </Project>

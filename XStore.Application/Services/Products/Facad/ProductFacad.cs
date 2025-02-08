@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using XStore.Application.Interfaces.Context;
 using XStore.Application.Interfaces.FacadPatterns;
 using XStore.Application.Services.Products.Commands.AddNewCategory;
+using XStore.Application.Services.Products.Queries.GetCategories;
 
 namespace XStore.Application.Services.Products.Facad
 {
@@ -21,7 +22,19 @@ namespace XStore.Application.Services.Products.Facad
         private AddNewCategoryService _AddNewCategory;
         public AddNewCategoryService AddNewCategoryService
         { 
-            get { return _AddNewCategory = _AddNewCategory ?? new AddNewCategoryService(_context); }
+            get 
+            { 
+                return _AddNewCategory = _AddNewCategory ?? new AddNewCategoryService(_context); 
+            }
+        }
+
+        private GetCategoryService _GetCategory;
+        public GetCategoryService GetCategoryService
+        {
+            get
+            {
+                return _GetCategory = _GetCategory ?? new GetCategoryService(_context);
+            }
         }
     }
 }

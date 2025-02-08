@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using XStore.Application.Services.Products.Commands.AddNewCategory;
+using XStore.Application.Services.Products.Queries.GetCategories;
 
 namespace XStore.Application.Interfaces.FacadPatterns
 {
     public interface IProductFacad
     {
         AddNewCategoryService AddNewCategoryService { get; }
+        GetCategoryService GetCategoryService { get; }
     }
 }
