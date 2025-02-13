@@ -5,34 +5,24 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using XStore.Application.Services.Users.Commands.RegisterUser;
 using XStore.Application.Services.Users.Commands.RemoveUser;
 using XStore.Application.Services.Users.Commands.StatusChangeUser;
+using XStore.Application.Interfaces.FacadPatterns;
 
 namespace XStore.WebAdmin.Controllers
 {
     public class UsersController : Controller
     { 
-        private readonly IGetUsersService _getUsersService;
-        private readonly IGetRolesService _getRolesService;
-        private readonly IRegisterUserService _registerUserService;
-        private readonly IRemoveUserService _removeUserService;
-        private readonly IStatusChangeUserService _statusChangeUserService;
+
+        private readonly IUserFacad _userFacad;
 
 
-        public UsersController(IGetUsersService getUsersService, 
-                               IGetRolesService getRolesService,
-                               IRegisterUserService registerUserService,
-                               IRemoveUserService removeUserService,
-                               IStatusChangeUserService statusChangeUserService)
+        public UsersController(IUserFacad userFacad)
         {
-            _getUsersService = getUsersService;
-            _getRolesService = getRolesService;
-            _registerUserService = registerUserService;
-            _removeUserService = removeUserService;
-            _statusChangeUserService = statusChangeUserService;
+            _userFacad = userFacad;
         }
 
         public IActionResult Index(string searchKey, int page =1)
         {
-            return View(_getUsersService.Execute(new RequestGetUserDto
+            return View(_userFacad.getUsersService.Execute(new RequestGetUserDto
             {
                 Page = page,
                 SearchKey = searchKey,
@@ -42,7 +32,7 @@ namespace XStore.WebAdmin.Controllers
         [HttpGet]
         public IActionResult Create ()
         {
-            ViewBag.Roles = new SelectList(_getRolesService.Execute().Roles,"Id", "Name");
+            ViewBag.Roles = new SelectList(_userFacad.getRolesService.Execute().Roles,"Id", "Name");
             return View();
         }
 
@@ -65,7 +55,7 @@ namespace XStore.WebAdmin.Controllers
 
             };
 
-            var result = _registerUserService.Execute(request);
+            var result = _userFacad.registerUserService.Execute(request);
             return Json(result);
         }
 
@@ -73,14 +63,14 @@ namespace XStore.WebAdmin.Controllers
         [HttpPost]
         public IActionResult Remove(long id)
         {
-            var result = _removeUserService.Execute(id);
+            var result = _userFacad.removeUserService.Execute(id);
             return Json(result);
         }
 
    
         public IActionResult ChangeStatus(long id, bool newStatus = false)
         {
-            var result = _statusChangeUserService.Execute(id, newStatus);
+            var result = _userFacad.statusChangeUserService.Execute(id, newStatus);
             return Json(result);
         }
 

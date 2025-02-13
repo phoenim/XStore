@@ -5,19 +5,17 @@ using System.Security.Claims;
 using XStore.Application.Services.Users.Commands.RegisterUser;
 using XStore.Common.Dto;
 using XStore.Application.Services.Users.Queries.LoginUser;
+using XStore.Application.Interfaces.FacadPatterns;
 
 namespace XStore.WebClient.Controllers
 {
     public class AuthenticationController : Controller
     {
-        private readonly IRegisterUserService _registerUserService;
-        private readonly ILoginUserService _loginUserService;
+        private readonly IUserFacad _userFacad;
 
-        public AuthenticationController (IRegisterUserService registerUserService,
-                                         ILoginUserService loginUserService)
+        public AuthenticationController (IUserFacad userFacad)
         {
-            _registerUserService = registerUserService;
-            _loginUserService = loginUserService;
+            _userFacad = userFacad;
         }
         
         [HttpGet]
@@ -58,7 +56,7 @@ namespace XStore.WebClient.Controllers
                 }
             };
 
-            var SignUpResult = _registerUserService.Execute(request);
+            var SignUpResult = _userFacad.registerUserService.Execute(request);
 
             if (SignUpResult.IsSuccess)
             {
@@ -95,7 +93,7 @@ namespace XStore.WebClient.Controllers
         [HttpPost]
         public IActionResult Signin(string email, string password, string url = "/")
         {
-            var signupResult = _loginUserService.Execute(new RequestLoginUser() { Email = email, Password = password});
+            var signupResult = _userFacad.loginUserService.Execute(new RequestLoginUser() { Email = email, Password = password});
             if (signupResult.IsSuccess == true)
             {
                 var claims = new List<Claim>()
