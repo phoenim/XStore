@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using XStore.Application.Services.Products.Commands.AddNewCategory;
+using XStore.Application.Services.Products.Commands.AddNewProduct;
 using XStore.Application.Services.Products.Queries.GetCategories;
 
 namespace XStore.Application.Interfaces.FacadPatterns
@@ -12,5 +13,6 @@ namespace XStore.Application.Interfaces.FacadPatterns
     {
         AddNewCategoryService AddNewCategoryService { get; }
         GetCategoryService GetCategoryService { get; }
+        AddNewProductService AddNewProductService { get; }
     }
 }

@@ -17,6 +17,8 @@ namespace XStore.Application.Interfaces.Context
         DbSet<UserInRole> UserInRoles { get; set; }
         DbSet<Category> Categories { get; set; }
         DbSet<Product> Products { get; set; }
+        DbSet<ProductImg> ProductImgs { get; set; }
+        DbSet<ProductFeature> ProductFeatures { get; set; }
 
         int SaveChanges(bool acceptAllChangesOnSuccess);
         int SaveChanges();

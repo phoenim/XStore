@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Hosting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 using XStore.Application.Interfaces.Context;
 using XStore.Application.Interfaces.FacadPatterns;
 using XStore.Application.Services.Products.Commands.AddNewCategory;
+using XStore.Application.Services.Products.Commands.AddNewProduct;
 using XStore.Application.Services.Products.Queries.GetCategories;
 
 namespace XStore.Application.Services.Products.Facad
@@ -13,10 +15,13 @@ namespace XStore.Application.Services.Products.Facad
     public class ProductFacad : IProductFacad
     {
         private readonly IDataBaseContext _context;
+        private readonly IHostingEnvironment _environment;
 
-        public ProductFacad(IDataBaseContext context)
+        public ProductFacad(IDataBaseContext context,
+                            IHostingEnvironment environment)
         { 
             _context = context;
+            _environment = environment;
         }
 
         private AddNewCategoryService _AddNewCategory;
@@ -34,6 +39,15 @@ namespace XStore.Application.Services.Products.Facad
             get
             {
                 return _GetCategory = _GetCategory ?? new GetCategoryService(_context);
+            }
+        }
+
+        private AddNewProductService _AddNewProduct;
+        public AddNewProductService AddNewProductService
+        {
+            get
+            {
+                return _AddNewProduct = _AddNewProduct ?? new AddNewProductService(_context, _environment);
             }
         }
     }

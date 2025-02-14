@@ -20,6 +20,8 @@ namespace XStore.Presistance.Contexts
         public DbSet<UserInRole> UserInRoles { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<ProductImg> ProductImgs {  get; set; }
+        public DbSet<ProductFeature> ProductFeatures { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
