@@ -16,6 +16,7 @@ var connectionStr = builder.Configuration.GetConnectionString("DefualtConnetion"
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DataBaseContext>(option => option.UseSqlServer(connectionStr));
+builder.Services.AddScoped<IDataBaseContext, DataBaseContext>();
 builder.Services.AddScoped<IUserFacad, UserFacad>();
 builder.Services.AddScoped<IProductFacad, ProductFacad>();
 
