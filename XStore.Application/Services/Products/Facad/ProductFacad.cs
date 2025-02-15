@@ -8,6 +8,7 @@ using XStore.Application.Interfaces.Context;
 using XStore.Application.Interfaces.FacadPatterns;
 using XStore.Application.Services.Products.Commands.AddNewCategory;
 using XStore.Application.Services.Products.Commands.AddNewProduct;
+using XStore.Application.Services.Products.Queries.GetAllCategories;
 using XStore.Application.Services.Products.Queries.GetCategories;
 
 namespace XStore.Application.Services.Products.Facad
@@ -48,6 +49,15 @@ namespace XStore.Application.Services.Products.Facad
             get
             {
                 return _AddNewProduct = _AddNewProduct ?? new AddNewProductService(_context, _environment);
+            }
+        }
+
+        private GetAllCategoriesService _GetAllCategories;
+        public GetAllCategoriesService GetAllCategoriesService
+        {
+            get
+            {
+                return _GetAllCategories = _GetAllCategories ?? new GetAllCategoriesService(_context);
             }
         }
     }
