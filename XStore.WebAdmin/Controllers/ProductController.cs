@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using XStore.Application.Interfaces.FacadPatterns;
+using XStore.Domain.Entities.Products;
 
 namespace XStore.WebAdmin.Controllers
 {
@@ -21,6 +22,12 @@ namespace XStore.WebAdmin.Controllers
         public IActionResult AddNewProduct()
         {
             ViewBag.categories = _productFacad.GetAllCategoriesService.Execute().Data;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddNewProduct(Product newProduct, int reqFeatures, List<IFormFile> imges)
+        {
             return View();
         }
     }
