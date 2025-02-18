@@ -1,11 +1,12 @@
 ﻿@using XStore.Domain.Entities.Products;
+@using XStore.WebAdmin.Views.Product.PageModels;
 @{
     ViewData["Title"] = "AddNewProduct";
     var categories = ViewBag.categories;
     int reqFeatures = 0;
     List<IFormFile> imges = new List<IFormFile>();
 }
-@model Product
+@model ProductBag
 
 <section class="basic-elements">
     <div class="row">
@@ -23,7 +24,7 @@
                 </div>
                 <div class="card-body">
                     <div class="px-3">
-                        <form method="post" asp-route-reqFeatures="@reqFeatures" asp-route-imges="@imges">
+                        <form method="get" asp-action="AddFeatureToProduct" asp-route-reqFeatures="@reqFeatures" asp-route-imges="@imges">
                             <div class="form">
                                 <div class="form-body">
                                     <div class="row">
@@ -108,47 +109,6 @@
                                 </div>
                             </div>
                         </form>
-
-                        <div class="col-xl-2 col-lg-6 col-md-12 mb-1">
-                            <fieldset class="form-group">
-                                <label for="basicInput"> نام ویژگی </label>
-                                <input type="text" class="form-control" id="txtDisplayName" placeholder="نام ویژگی" />
-                            </fieldset>
-                        </div>
-
-                        <div class="col-xl-2 col-lg-6 col-md-12 mb-1">
-                            <fieldset class="form-group">
-                                <label for="basicInput"> مقدار ویژگی </label>
-                                <input type="text" class="form-control" id="txtValue" placeholder="مقدار ویژگی" />
-                            </fieldset>
-                        </div>
-                        <div class="col-xl-2 col-lg-6 col-md-12 mb-1">
-                            <fieldset class="form-group">
-                                <br />
-                                <a class="btn btn-success" id="btnAddFeatures">افزودن</a>
-                            </fieldset>
-                        </div>
-
-
-
-                        <br class="clear" />
-
-                        <table id="tbl_Features" class="col-md-12 table table-bordered table-hover  table-condensed table-responsive">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        نام ویژگی
-                                    </th>
-                                    <th>
-                                        مقدار ویژگی
-                                    </th>
-                                    <th>
-
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
 
                     </div>
                 </div>

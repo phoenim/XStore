@@ -1,0 +1,57 @@
+﻿@using XStore.Application.Services.Products.Commands.AddNewProduct;
+@using XStore.Domain.Entities.Products;
+@using XStore.WebAdmin.Views.Product.PageModels;
+@{
+    ProductBag product = Model.Product;
+}
+@model AddFeatureToProductDto
+
+
+
+
+<section>
+   
+    <form method="post" asp-action="AddNewProduct" asp-route-pBag="@product">
+        <input hidden asp-for="@Model.Product" />
+        <table class="col-md-12 table table-bordered table-hover  table-condensed table-responsive">
+            <thead>
+                <tr>
+                    <th>
+                        شماره
+                    </th>
+                    <th>
+                        نام ویژگی
+                    </th>
+                    <th>
+                        مقدار ویژگی
+                    </th>
+
+                </tr>
+
+                @for (int i = 0; i < Model.reqFeatures; i++)
+                {
+                    <tr>
+                        <th>
+                            <label>
+                                @i.
+                            </label>
+                        </th>
+
+                        <th>
+                            <input asp-for="@Model.features[i].DisplayName" type="text" class="form-control" placeholder="نام ویژگی" />
+                        </th>
+                        <th>
+                            <input asp-for="@Model.features[i].Value" type="text" class="form-control"  placeholder="مقدار ویژگی" />
+                        </th>
+
+                    </tr>
+                }
+            </thead>
+                
+        </table>
+        <button class="btn-success" type="submit">
+            ثبت نهایی
+        </button>
+    </form>
+
+</section>
