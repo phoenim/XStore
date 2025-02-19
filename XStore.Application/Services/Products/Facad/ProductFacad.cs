@@ -10,6 +10,7 @@ using XStore.Application.Services.Products.Commands.AddNewCategory;
 using XStore.Application.Services.Products.Commands.AddNewProduct;
 using XStore.Application.Services.Products.Queries.GetAllCategories;
 using XStore.Application.Services.Products.Queries.GetCategories;
+using XStore.Application.Services.Products.Queries.GetProductsForAdmin;
 
 namespace XStore.Application.Services.Products.Facad
 {
@@ -60,5 +61,13 @@ namespace XStore.Application.Services.Products.Facad
                 return _GetAllCategories = _GetAllCategories ?? new GetAllCategoriesService(_context);
             }
         }
+
+        private GetProductsForAdmin _GetProductsForAdmin;
+        public GetProductsForAdmin GetProductsForAdminService
+        {
+            get
+            {
+                return _GetProductsForAdmin = _GetProductsForAdmin ?? new GetProductsForAdmin(_context);
+            }
     }
 }
