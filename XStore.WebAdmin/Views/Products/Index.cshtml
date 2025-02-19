@@ -41,7 +41,7 @@
                                                             <td>@item.Displayed</td>
                                                             <td>
                                                                 <a class="btn btn-danger">حذف</a>
-                                                                <a href="~/admin/products/detail/@item.Id" class="btn btn-info">اطلاعات بیشتر</a>
+                                                                <a asp-action="Details" asp-route-Id="@item.Id" class="btn btn-info">اطلاعات بیشتر</a>
                                                             </td>
                                                         </tr>
                                                     }

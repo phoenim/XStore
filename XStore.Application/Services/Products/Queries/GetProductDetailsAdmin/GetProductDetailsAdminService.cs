@@ -35,10 +35,11 @@ namespace XStore.Application.Services.Products.Queries.GetProductDetailsAdmin
                 Name = foundedProduct.Name,
                 Description = foundedProduct.Description,
                 Price = foundedProduct.Price,
+                Brand = foundedProduct.Brand,
                 Displayed = foundedProduct.Displayed,
                 Inventory = foundedProduct.Inventory,
                 Category = CategoryStr(foundedProduct.CategoryId),
-                Features = FeaturesStr(foundedProduct.Id)
+                Features = GetFeatures(Id)
 
             };
 
@@ -60,15 +61,19 @@ namespace XStore.Application.Services.Products.Queries.GetProductDetailsAdmin
             return res;
         }
 
-        private List<string> FeaturesStr (long Id)
+        private List<ProductDetail_FetureDto> GetFeatures (long Id)
         {
             var productFeatures = _context.ProductFeatures.Where(p =>  p.ProductId == Id)
                                     .ToList();
 
-            List<string> result = new List<string>();
+            List<ProductDetail_FetureDto> result = new List<ProductDetail_FetureDto>();
             foreach(var item in productFeatures)
             {
-                result.Add($"{item.DisplayName} - {item.Value}");
+                result.Add(new ProductDetail_FetureDto()
+                {
+                    DisplayedName = item.DisplayName,
+                    Value = item.Value
+                });
             }
 
             return result;

@@ -24,6 +24,11 @@ namespace XStore.WebAdmin.Controllers
             return View(products);
         }
 
+        public IActionResult Details (long Id)
+        {
+            return View(_productFacad.GetProductDetailsAdminService.Execute(Id).Data);
+        }
+
         [HttpGet]
         public IActionResult AddNewProduct()
         {
