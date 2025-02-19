@@ -17,6 +17,6 @@ namespace XStore.Application.Interfaces.FacadPatterns
         GetCategoryService GetCategoryService { get; }
         AddNewProductService AddNewProductService { get; }
         GetAllCategoriesService GetAllCategoriesService { get; }
-        GetProductsForAdmin GetProductsForAdminService { get; }
+        GetProductsForAdminService GetProductsForAdminService { get; }
     }
 }

@@ -62,12 +62,13 @@ namespace XStore.Application.Services.Products.Facad
             }
         }
 
-        private GetProductsForAdmin _GetProductsForAdmin;
-        public GetProductsForAdmin GetProductsForAdminService
+        private GetProductsForAdminService _GetProductsForAdmin;
+        public GetProductsForAdminService GetProductsForAdminService
         {
             get
             {
-                return _GetProductsForAdmin = _GetProductsForAdmin ?? new GetProductsForAdmin(_context);
+                return _GetProductsForAdmin = _GetProductsForAdmin ?? new GetProductsForAdminService(_context);
             }
+        }
     }
 }

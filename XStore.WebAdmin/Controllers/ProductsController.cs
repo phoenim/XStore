@@ -6,18 +6,22 @@ using XStore.WebAdmin.Views.Product.PageModels;
 
 namespace XStore.WebAdmin.Controllers
 {
-    public class ProductController : Controller
+    public class ProductsController : Controller
     {
         private readonly IProductFacad _productFacad;
 
-        public ProductController (IProductFacad productFacad)
+        public ProductsController (IProductFacad productFacad)
         {
             _productFacad = productFacad;
         }
 
         public IActionResult Index()
         {
-            return View();
+            ProductListForAdmin products = new ProductListForAdmin()
+            {
+                products = _productFacad.GetProductsForAdminService.Execute().Data
+            };
+            return View(products);
         }
 
         [HttpGet]

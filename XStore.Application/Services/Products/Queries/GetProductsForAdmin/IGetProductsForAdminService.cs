@@ -8,7 +8,7 @@ using XStore.Common.Dto;
 
 namespace XStore.Application.Services.Products.Queries.GetProductsForAdmin
 {
-    public interface IGetProductsForAdmin
+    public interface IGetProductsForAdminService
     {
         Result<List<ProductForAdminDto>> Execute();
 

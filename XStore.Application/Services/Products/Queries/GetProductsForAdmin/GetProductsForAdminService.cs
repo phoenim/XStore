@@ -5,11 +5,11 @@ using XStore.Domain.Entities.Products;
 
 namespace XStore.Application.Services.Products.Queries.GetProductsForAdmin
 {
-    public class GetProductsForAdmin : IGetProductsForAdmin
+    public class GetProductsForAdminService : IGetProductsForAdminService
     {
         private readonly IDataBaseContext _context;
 
-        public GetProductsForAdmin (IDataBaseContext context)
+        public GetProductsForAdminService (IDataBaseContext context)
         {
             _context = context;
         }
@@ -37,6 +37,7 @@ namespace XStore.Application.Services.Products.Queries.GetProductsForAdmin
                 productList.Add(
                     new ProductForAdminDto()
                     {
+                        Id = item.Id,
                         Name = item.Name,
                         Brand = item.Brand,
                         Describtion = item.Description,
@@ -61,7 +62,7 @@ namespace XStore.Application.Services.Products.Queries.GetProductsForAdmin
             Category category = _context.Categories.Find(Id);
 
             string res = category.ParentCategoryId == 0 ?
-                         $"{category.Name}" : $"{category.ParentCategory.Name} - {category.Name}";
+                         $"{category.Name}" : $"{_context.Categories.Find(category.ParentCategoryId).Name} - {category.Name}";
             return res;
         }
     }
