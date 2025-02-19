@@ -38,18 +38,21 @@ namespace XStore.Application.Services.Products.Commands.AddNewProduct
                 _context.Products.Add(newProduct);
 
 
-                List<ProductImg> productImgs = new List<ProductImg>();
-                foreach (var item in request.Images)
+                if(request.Images != null)
                 {
-                    var uploadedImage = UploadFile(item);
-                    ProductImg newImg = new ProductImg()
+                    List<ProductImg> productImgs = new List<ProductImg>();
+                    foreach (var item in request.Images)
                     {
-                        Product = newProduct,
-                        Src = uploadedImage.FileAddress,
-                    };
-                    productImgs.Add(newImg);
+                        var uploadedImage = UploadFile(item);
+                        ProductImg newImg = new ProductImg()
+                        {
+                            Product = newProduct,
+                            Src = uploadedImage.FileAddress,
+                        };
+                        productImgs.Add(newImg);
+                    }
+                    _context.ProductImgs.AddRange(productImgs);
                 }
-                _context.ProductImgs.AddRange(productImgs);
 
                 List<ProductFeature> Productfeatures = new List<ProductFeature>();
                 foreach (var item in request.Features)
@@ -60,6 +63,7 @@ namespace XStore.Application.Services.Products.Commands.AddNewProduct
                         Value = item.Value,
                         Product = newProduct,
                     };
+                    Productfeatures.Add(feature);
                 }
                 _context.ProductFeatures.AddRange(Productfeatures);
 

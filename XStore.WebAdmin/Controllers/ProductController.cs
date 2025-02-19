@@ -28,11 +28,22 @@ namespace XStore.WebAdmin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddNewProduct(AddFeatureToProductDto newProduct, ProductBag pBag)
+        public IActionResult AddNewProduct(AddFeatureToProductDto newProduct)
         {
-            ProductBag product = pBag;
-            AddNewProduct_FeatureDto[] features = newProduct.features;
-            return View();
+            RequestAddProductDto request = new RequestAddProductDto()
+            {
+                Name = newProduct.Product.Name,
+                Brand = newProduct.Product.Brand,
+                Price = newProduct.Product.Price,
+                Describtion = newProduct.Product.Description,
+                Inventory = newProduct.Product.Inventory,
+                Displayed = newProduct.Product.Displayed,
+                CategoryId = newProduct.Product.CategoryId,
+                Features = newProduct.features.ToList(),
+            };
+            
+
+            return Json(_productFacad.AddNewProductService.Execute(request));
         }
 
         [HttpGet]
