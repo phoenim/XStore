@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using XStore.Application.Interfaces.Context;
 using XStore.Application.Interfaces.FacadPatterns;
+using XStore.Application.Services.Products.Facad;
 using XStore.Application.Services.Users.Commands.RegisterUser;
 using XStore.Application.Services.Users.Commands.RemoveUser;
 using XStore.Application.Services.Users.Facad;
@@ -18,6 +19,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DataBaseContext>(option => option.UseSqlServer(connectionStr));
 builder.Services.AddScoped<IDataBaseContext, DataBaseContext>();
 builder.Services.AddScoped<IUserFacad, UserFacad>();
+builder.Services.AddScoped<IProductFacad, ProductFacad>();
 
 builder.Services.AddAuthentication(options =>
 {
