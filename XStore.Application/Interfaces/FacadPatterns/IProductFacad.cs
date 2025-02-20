@@ -9,6 +9,7 @@ using XStore.Application.Services.Products.Queries.GetAllCategories;
 using XStore.Application.Services.Products.Queries.GetCategories;
 using XStore.Application.Services.Products.Queries.GetProductDetailsAdmin;
 using XStore.Application.Services.Products.Queries.GetProductsForAdmin;
+using XStore.Application.Services.Products.Queries.GetProductsForClient;
 
 namespace XStore.Application.Interfaces.FacadPatterns
 {
@@ -20,5 +21,6 @@ namespace XStore.Application.Interfaces.FacadPatterns
         GetAllCategoriesService GetAllCategoriesService { get; }
         GetProductsForAdminService GetProductsForAdminService { get; }
         GetProductDetailsAdminService GetProductDetailsAdminService { get; }
+        GetProductsForClientService GetProductsForClientService { get; }
     }
 }
