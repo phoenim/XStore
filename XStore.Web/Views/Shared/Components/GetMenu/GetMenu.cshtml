@@ -1,0 +1,34 @@
+﻿@using XStore.Domain.Entities.Products
+
+@model List<Category>
+@{
+    Layout = null;
+}
+
+@foreach (var item in Model)
+{
+    <li id="nav-menu-item" class="menu-item nav-overlay">
+        <a asp-controller="Products" asp-action="Index" asp-route-catId="@item.Id" class="current-link-menu">
+            @item.Name
+        </a>
+        
+        @if(item.ChildCategories.Count() > 0)
+        {
+            <ul class="sub-menu is-mega-menu mega-menu-level-two">
+
+                @foreach (var subItem in item.ChildCategories)
+                {
+                    <li class="menu-mega-item menu-item-type-mega-menu">
+                        <a asp-controller="Products" asp-action="Index" asp-route-catId="@subItem.Id" class="mega-menu-link">
+                            @subItem.Name
+                        </a>
+                    </li>
+                }
+
+                <div class="bg-image">
+                    <img src="~/SiteTemplate/assets/images/menu-main/digital.png" alt="">
+                </div>
+            </ul>
+        }
+    </li>
+}

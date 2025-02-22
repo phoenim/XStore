@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using XStore.Application.Interfaces.Context;
 using XStore.Common.Dto;
+using XStore.Domain.Entities.Products;
 
 namespace XStore.Application.Services.Products.Queries.GetProductsForClient
 {
@@ -15,7 +16,8 @@ namespace XStore.Application.Services.Products.Queries.GetProductsForClient
 
         public Result<List<ProductForClientDto>> Execute(long? categoryId)
         {
-            if(categoryId == null)
+            List<Product> foundedProducts;
+            if (categoryId == null)
             {
                 if (_context.Products.Count() == 0)
                 {
@@ -27,7 +29,7 @@ namespace XStore.Application.Services.Products.Queries.GetProductsForClient
                     };
                 }
 
-                var foundedProducts = _context.Products.ToList();
+                foundedProducts = _context.Products.ToList();
                 List<ProductForClientDto> products = new List<ProductForClientDto>();
 
                 foreach (var item in foundedProducts)
@@ -49,11 +51,25 @@ namespace XStore.Application.Services.Products.Queries.GetProductsForClient
                 };
             }
 
-            var foundedProducts = _context.Products.Where(p => p.CategoryId == categoryId)
+            
+            if (_context.Categories.Where(c => c.Id == categoryId)
+                .FirstOrDefault().ParentCategoryId == null)
+            {
+                foundedProducts = _context.Products.Include(p => p.ProductCategory)
+                .ThenInclude(p => p.ChildCategories)
+                .Where(p => p.ProductCategory.ParentCategoryId == categoryId)
+                .Include(p => p.ProductFeatures)
+                .ToList();
+            }
+        
+            else
+            {
+                foundedProducts = _context.Products.Where(p => p.CategoryId == categoryId)
                             .Include(p => p.ProductCategory)
                             .ThenInclude(p => p.ChildCategories)
                             .Include(p => p.ProductFeatures)
                             .ToList();
+            }
 
             if(foundedProducts.Count > 0)
             {
