@@ -1,4 +1,5 @@
-﻿using XStore.Application.Interfaces.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using XStore.Application.Interfaces.Context;
 using XStore.Common.Dto;
 
 namespace XStore.Application.Services.Products.Queries.GetProductsForClient
@@ -12,37 +13,75 @@ namespace XStore.Application.Services.Products.Queries.GetProductsForClient
             _context = context;
         }
 
-        public Result<List<ProductForClientDto>> Execute()
+        public Result<List<ProductForClientDto>> Execute(long? categoryId)
         {
-            if(_context.Products.Count() == 0)
+            if(categoryId == null)
             {
+                if (_context.Products.Count() == 0)
+                {
+                    return new Result<List<ProductForClientDto>>()
+                    {
+                        Data = null,
+                        IsSuccess = false,
+                        Message = "محصولی موجود نمیباشد"
+                    };
+                }
+
+                var foundedProducts = _context.Products.ToList();
+                List<ProductForClientDto> products = new List<ProductForClientDto>();
+
+                foreach (var item in foundedProducts)
+                {
+                    products.Add(new ProductForClientDto
+                    {
+                        Id = item.Id,
+                        Title = item.Name,
+                        Price = item.Price,
+                        ImgSrc = ""
+                    });
+                }
+
                 return new Result<List<ProductForClientDto>>()
                 {
-                    Data = null,
-                    IsSuccess = false,
-                    Message = "محصولی موجود نمیباشد"
+                    Data = products,
+                    IsSuccess = true,
+                    Message = "محصولات دریافت شدند"
                 };
             }
 
-            var foundedProducts = _context.Products.ToList();
-            List<ProductForClientDto> products = new List<ProductForClientDto>();
+            var foundedProducts = _context.Products.Where(p => p.CategoryId == categoryId)
+                            .Include(p => p.ProductCategory)
+                            .ThenInclude(p => p.ChildCategories)
+                            .Include(p => p.ProductFeatures)
+                            .ToList();
 
-            foreach (var item in foundedProducts)
+            if(foundedProducts.Count > 0)
             {
-                products.Add(new ProductForClientDto
+                List<ProductForClientDto> products = new List<ProductForClientDto>();
+                foreach (var item in foundedProducts)
                 {
-                    Id = item.Id,
-                    Title = item.Name,
-                    Price = item.Price,
-                    ImgSrc = "" 
-                });
+                    products.Add(new ProductForClientDto
+                    {
+                        Id = item.Id,
+                        Title = item.Name,
+                        Price = item.Price,
+                    });
+
+                }
+
+                return new Result<List<ProductForClientDto>>()
+                {
+                    Data = products,
+                    IsSuccess = true,
+                    Message = "محصولات با موفقیت پیدا شدند"
+                };
             }
 
             return new Result<List<ProductForClientDto>>()
             {
-                Data = products,
-                IsSuccess = true,
-                Message = "محصولات دریافت شدند"
+                Data = null,
+                IsSuccess = false,
+                Message = "محصولی یافت نشد"
             };
         }
     }
