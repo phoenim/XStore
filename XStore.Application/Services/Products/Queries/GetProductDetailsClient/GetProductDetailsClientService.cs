@@ -18,7 +18,7 @@ namespace XStore.Application.Services.Products.Queries.GetProductDetailsClient
             var foundedProduct = _context.Products.Include(p => p.ProductFeatures)
                                  .Include(p => p.ProductCategory)
                                  .ThenInclude(c => c.ParentCategory)
-                                 .FirstOrDefault();
+                                 .FirstOrDefault(p => p.Id == Id);
 
             if(foundedProduct == null)
             {

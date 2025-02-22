@@ -11,6 +11,7 @@ using XStore.Application.Services.Products.Commands.AddNewProduct;
 using XStore.Application.Services.Products.Queries.GetAllCategories;
 using XStore.Application.Services.Products.Queries.GetCategories;
 using XStore.Application.Services.Products.Queries.GetProductDetailsAdmin;
+using XStore.Application.Services.Products.Queries.GetProductDetailsClient;
 using XStore.Application.Services.Products.Queries.GetProductsForAdmin;
 using XStore.Application.Services.Products.Queries.GetProductsForClient;
 
@@ -88,6 +89,15 @@ namespace XStore.Application.Services.Products.Facad
             get
             {
                 return _GetProductsForClient = _GetProductsForClient ?? new GetProductsForClientService(_context);
+            }
+        }
+
+        private GetProductDetailsClientService _GetProductDetailsClient;
+        public GetProductDetailsClientService GetProductDetailsClientService
+        {
+            get
+            {
+                return _GetProductDetailsClient = _GetProductDetailsClient ?? new GetProductDetailsClientService(_context);
             }
         }
     }

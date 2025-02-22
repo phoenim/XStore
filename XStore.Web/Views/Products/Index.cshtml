@@ -46,13 +46,13 @@
                                 <div class="col-lg-3 col-md-3 col-xs-12 order-1 d-block mb-3">
                                     <section class="product-box product product-type-simple">
                                         <div class="thumb">
-                                            <a  class="d-block">
+                                            <a asp-action="Details" asp-route-Id="@item.Id" class="d-block">
 
                                                 <img src="~/@item.ImgSrc">
                                             </a>
                                         </div>
                                         <div class="title">
-                                            <a href="~/products/detail/@item.Id">  @item.Title</a>
+                                            <a asp-action="Details" asp-route-Id="@item.Id">  @item.Title</a>
                                         </div>
                                         <div class="price">
                                             <span class="amount">

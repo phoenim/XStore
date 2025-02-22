@@ -15,5 +15,10 @@ namespace XStore.WebClient.Controllers
         {
             return View(_productFacad.GetProductsForClientService.Execute().Data);
         }
+
+        public IActionResult Details(long Id)
+        {
+            return View(_productFacad.GetProductDetailsClientService.Execute(Id).Data);
+        }
     }
 }
