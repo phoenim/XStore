@@ -11,9 +11,9 @@ namespace XStore.WebClient.Controllers
         {
             _productFacad = productFacad;
         }
-        public IActionResult Index(long? catId)
+        public IActionResult Index(long? catId, string? searchKey)
         {
-            return View(_productFacad.GetProductsForClientService.Execute(catId).Data);
+            return View(_productFacad.GetProductsForClientService.Execute(catId,searchKey).Data);
         }
 
         public IActionResult Details(long Id)

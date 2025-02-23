@@ -10,6 +10,6 @@ namespace XStore.Application.Services.Products.Queries.GetProductsForClient
 {
     public  interface IGetProductsForClientService
     {
-        Result<List<ProductForClientDto>> Execute(long? categoryId);
+        Result<List<ProductForClientDto>> Execute(long? categoryId, string? searchKey);
     }
 }

@@ -14,61 +14,74 @@ namespace XStore.Application.Services.Products.Queries.GetProductsForClient
             _context = context;
         }
 
-        public Result<List<ProductForClientDto>> Execute(long? categoryId)
+        public Result<List<ProductForClientDto>> Execute(long? categoryId, string? searchKey)
         {
             List<Product> foundedProducts;
             if (categoryId == null)
             {
-                if (_context.Products.Count() == 0)
+                if (!String.IsNullOrWhiteSpace(searchKey))
                 {
+                    foundedProducts = _context.Products.Where(p => p.Name.Contains(searchKey)).ToList();
+                }
+
+                else
+                {
+                    if (_context.Products.Count() == 0)
+                    {
+                        return new Result<List<ProductForClientDto>>()
+                        {
+                            Data = null,
+                            IsSuccess = false,
+                            Message = "محصولی موجود نمیباشد"
+                        };
+                    }
+
+                    foundedProducts = _context.Products.ToList();
+                    List<ProductForClientDto> products = new List<ProductForClientDto>();
+
+                    foreach (var item in foundedProducts)
+                    {
+                        products.Add(new ProductForClientDto
+                        {
+                            Id = item.Id,
+                            Title = item.Name,
+                            Price = item.Price,
+                            ImgSrc = ""
+                        });
+                    }
+
                     return new Result<List<ProductForClientDto>>()
                     {
-                        Data = null,
-                        IsSuccess = false,
-                        Message = "محصولی موجود نمیباشد"
+                        Data = products,
+                        IsSuccess = true,
+                        Message = "محصولات دریافت شدند"
                     };
                 }
-
-                foundedProducts = _context.Products.ToList();
-                List<ProductForClientDto> products = new List<ProductForClientDto>();
-
-                foreach (var item in foundedProducts)
-                {
-                    products.Add(new ProductForClientDto
-                    {
-                        Id = item.Id,
-                        Title = item.Name,
-                        Price = item.Price,
-                        ImgSrc = ""
-                    });
-                }
-
-                return new Result<List<ProductForClientDto>>()
-                {
-                    Data = products,
-                    IsSuccess = true,
-                    Message = "محصولات دریافت شدند"
-                };
+               
             }
 
             
-            if (_context.Categories.Where(c => c.Id == categoryId)
-                .FirstOrDefault().ParentCategoryId == null)
-            {
-                foundedProducts = _context.Products.Include(p => p.ProductCategory)
-                .ThenInclude(p => p.ChildCategories)
-                .Where(p => p.ProductCategory.ParentCategoryId == categoryId)
-                .Include(p => p.ProductFeatures)
-                .ToList();
-            }
-        
+            
             else
             {
-                foundedProducts = _context.Products.Where(p => p.CategoryId == categoryId)
-                            .Include(p => p.ProductCategory)
-                            .ThenInclude(p => p.ChildCategories)
-                            .Include(p => p.ProductFeatures)
-                            .ToList();
+                if (_context.Categories.Where(c => c.Id == categoryId)
+                .FirstOrDefault().ParentCategoryId == null)
+                {
+                    foundedProducts = _context.Products.Include(p => p.ProductCategory)
+                    .ThenInclude(p => p.ChildCategories)
+                    .Where(p => p.ProductCategory.ParentCategoryId == categoryId)
+                    .Include(p => p.ProductFeatures)
+                    .ToList();
+                }
+
+                else
+                {
+                    foundedProducts = _context.Products.Where(p => p.CategoryId == categoryId)
+                                .Include(p => p.ProductCategory)
+                                .ThenInclude(p => p.ChildCategories)
+                                .Include(p => p.ProductFeatures)
+                                .ToList();
+                }
             }
 
             if(foundedProducts.Count > 0)
