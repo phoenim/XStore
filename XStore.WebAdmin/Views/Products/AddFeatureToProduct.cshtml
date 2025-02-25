@@ -1,17 +1,21 @@
 ﻿@using XStore.Application.Services.Products.Commands.AddNewProduct;
 @using XStore.Domain.Entities.Products;
 @using XStore.WebAdmin.Views.Product.PageModels;
-@{
 
-}
 @model AddFeatureToProductDto
-
+@{
+    List<IFormFile> images = Model.Product.images;
+}
 
 
 
 <section>
    
-    <form method="post" asp-action="AddNewProduct">
+    <form method="post" asp-action="AddNewProduct" asp-route-images="@Model.Product.images" enctype="multipart/form-data">
+        
+        @{
+            images = Model.Product.images;
+        }
         <div>
             <input hidden asp-for="@Model.Product.Name" value="@Model.Product.Name" />
             <input hidden asp-for="@Model.Product.Price" value="@Model.Product.Price" />
@@ -20,6 +24,7 @@
             <input hidden asp-for="@Model.Product.Description" value="@Model.Product.Description" />
             <input hidden asp-for="@Model.Product.CategoryId" value="@Model.Product.CategoryId" />
             <input hidden asp-for="@Model.Product.Displayed" value="@Model.Product.Displayed" />
+            
         </div>
         <table class="col-md-12 table table-bordered table-hover  table-condensed table-responsive">
             <thead>

@@ -3,8 +3,8 @@
 @{
     ViewData["Title"] = "AddNewProduct";
     var categories = ViewBag.categories;
-    int reqFeatures = 0;
-    List<IFormFile> imges = new List<IFormFile>();
+
+
 }
 @model ProductBag
 
@@ -24,7 +24,7 @@
                 </div>
                 <div class="card-body">
                     <div class="px-3">
-                        <form method="get" asp-action="AddFeatureToProduct" asp-route-reqFeatures="@reqFeatures" asp-route-imges="@imges">
+                        <form method="post" enctype="multipart/form-data" asp-action="AddNewProduct">
                             <div class="form">
                                 <div class="form-body">
                                     <div class="row">
@@ -61,7 +61,7 @@
                                         <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
                                             <fieldset class="form-group">
                                                 <label for="basicInput">تصاویر </label>
-                                                <input type="file" multiple class="form-control" accept="image/*" asp-for="@imges">
+                                                <input type="file" multiple class="form-control" accept="image/*" asp-for="@Model.images">
                                             </fieldset>
                                         </div>
 
@@ -89,13 +89,42 @@
 
                                         <hr />
                                         <hr />
-                                        <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
-                                            <fieldset class="form-group">
-                                                <label for="basicInput"> تعداد ویژگی های مورد نیاز</label>
-                                                <input required type="number" class="form-control" asp-for="@reqFeatures">
-                                            </fieldset>
-                                        </div>
+                                        <table class="col-md-12 table table-bordered table-hover  table-condensed table-responsive">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        شماره
+                                                    </th>
+                                                    <th>
+                                                        نام ویژگی
+                                                    </th>
+                                                    <th>
+                                                        مقدار ویژگی
+                                                    </th>
 
+                                                </tr>
+
+                                                @for (int i = 0; i < 10; i++)
+                                                {
+                                                    <tr>
+                                                        <th>
+                                                            <label>
+                                                                @i.
+                                                            </label>
+                                                        </th> 
+
+                                                        <th>
+                                                            <input asp-for="@Model.features[i].DisplayName" type="text" class="form-control" placeholder="نام ویژگی" />
+                                                        </th>
+                                                        <th>
+                                                            <input asp-for="@Model.features[i].Value" type="text" class="form-control" placeholder="مقدار ویژگی" />
+                                                        </th>
+
+                                                    </tr>
+                                                }
+                                            </thead>
+
+                                        </table>
 
                                         <div class="col-xl-12 col-lg-12 col-md-12 mb-1">
                                             <fieldset class="form-group">

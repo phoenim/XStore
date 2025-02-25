@@ -9,6 +9,7 @@ namespace XStore.WebAdmin.Controllers
     public class ProductsController : Controller
     {
         private readonly IProductFacad _productFacad;
+        private List<IFormFile> images = new List<IFormFile>();
 
         public ProductsController (IProductFacad productFacad)
         {
@@ -37,27 +38,29 @@ namespace XStore.WebAdmin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddNewProduct(AddFeatureToProductDto newProduct)
+        public IActionResult AddNewProduct(ProductBag newProduct, List<IFormFile> images)
         {
             RequestAddProductDto request = new RequestAddProductDto()
             {
-                Name = newProduct.Product.Name,
-                Brand = newProduct.Product.Brand,
-                Price = newProduct.Product.Price,
-                Describtion = newProduct.Product.Description,
-                Inventory = newProduct.Product.Inventory,
-                Displayed = newProduct.Product.Displayed,
-                CategoryId = newProduct.Product.CategoryId,
+                Name = newProduct.Name,
+                Brand = newProduct.Brand,
+                Price = newProduct.Price,
+                Describtion = newProduct.Description,
+                Inventory = newProduct.Inventory,
+                Displayed = newProduct.Displayed,
+                CategoryId = newProduct.CategoryId,
                 Features = newProduct.features.ToList(),
+                Images = newProduct.images,
             };
             
 
             return Json(_productFacad.AddNewProductService.Execute(request));
         }
 
-        [HttpGet]
-        public IActionResult AddFeatureToProduct(ProductBag newProduct, int reqFeatures)
+      
+        public IActionResult AddFeatureToProduct(ProductBag newProduct, int reqFeatures, IFormFile images)
         {
+            
             AddFeatureToProductDto product = new AddFeatureToProductDto();
             product.Product = newProduct;
             product.reqFeatures = reqFeatures;

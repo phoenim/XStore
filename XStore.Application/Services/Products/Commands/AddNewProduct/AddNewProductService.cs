@@ -57,13 +57,16 @@ namespace XStore.Application.Services.Products.Commands.AddNewProduct
                 List<ProductFeature> Productfeatures = new List<ProductFeature>();
                 foreach (var item in request.Features)
                 {
-                    ProductFeature feature = new ProductFeature()
+                    if((item.DisplayName != null) && (item.Value != null))
                     {
-                        DisplayName = item.DisplayName,
-                        Value = item.Value,
-                        Product = newProduct,
-                    };
-                    Productfeatures.Add(feature);
+                        ProductFeature feature = new ProductFeature()
+                        {
+                            DisplayName = item.DisplayName,
+                            Value = item.Value,
+                            Product = newProduct,
+                        };
+                        Productfeatures.Add(feature);
+                    }
                 }
                 _context.ProductFeatures.AddRange(Productfeatures);
 
