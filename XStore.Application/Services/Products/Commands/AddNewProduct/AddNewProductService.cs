@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using XStore.Application.Interfaces.Context;
 using XStore.Common.Dto;
+using XStore.Common.SharedResources;
 using XStore.Domain.Entities.Products;
 
 namespace XStore.Application.Services.Products.Commands.AddNewProduct
@@ -40,6 +41,7 @@ namespace XStore.Application.Services.Products.Commands.AddNewProduct
 
                 if(request.Images != null)
                 {
+
                     List<ProductImg> productImgs = new List<ProductImg>();
                     foreach (var item in request.Images)
                     {
@@ -91,10 +93,11 @@ namespace XStore.Application.Services.Products.Commands.AddNewProduct
         }
         private UploadDto UploadFile(IFormFile file)
         {
+            
             if (file != null)
             {
                 string folder = $@"images\ProductImages\";
-                var uploadsRootFolder = Path.Combine(_environment.WebRootPath, folder);
+                var uploadsRootFolder = Path.Combine(FileHelper.GetResourcesPath(), folder);
                 if (!Directory.Exists(uploadsRootFolder))
                 {
                     Directory.CreateDirectory(uploadsRootFolder);
@@ -119,7 +122,7 @@ namespace XStore.Application.Services.Products.Commands.AddNewProduct
 
                 return new UploadDto()
                 {
-                    FileAddress = folder + fileName,
+                    FileAddress = uploadsRootFolder + fileName,
                     Status = true,
                 };
             }

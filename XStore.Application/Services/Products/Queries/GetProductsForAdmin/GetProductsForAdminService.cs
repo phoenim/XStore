@@ -30,6 +30,7 @@ namespace XStore.Application.Services.Products.Queries.GetProductsForAdmin
 
             var products = _context.Products
                             .Include(p => p.ProductCategory)
+                            .Include(p => p.ProductImgs)
                             .ToList();
 
             foreach (var item in products)
@@ -44,7 +45,9 @@ namespace XStore.Application.Services.Products.Queries.GetProductsForAdmin
                         Price = item.Price,
                         Inventory = item.Inventory,
                         Category = CategoryStr(item.CategoryId),
-                        Displayed = item.Displayed
+                        Displayed = item.Displayed,
+                        Image = item.ProductImgs.First().Src,
+                        
                     });
                
             }

@@ -1,4 +1,6 @@
-﻿namespace XStore.Application.Services.Products.Queries.GetProductsForAdmin
+﻿using Microsoft.AspNetCore.Http;
+
+namespace XStore.Application.Services.Products.Queries.GetProductsForAdmin
 {
     public class ProductForAdminDto
     {
@@ -10,6 +12,7 @@
         public double Price {  get; set; }
         public bool Displayed { get; set; }
         public string Category { get; set; }
+        public string Image { get; set; }
     }
 
 }

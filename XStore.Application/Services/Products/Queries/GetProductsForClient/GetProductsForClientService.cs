@@ -36,18 +36,37 @@ namespace XStore.Application.Services.Products.Queries.GetProductsForClient
                         };
                     }
 
-                    foundedProducts = _context.Products.ToList();
+                    foundedProducts = _context.Products
+                                      .Include(p => p.ProductImgs)    
+                                      .ToList();
+
                     List<ProductForClientDto> products = new List<ProductForClientDto>();
 
                     foreach (var item in foundedProducts)
                     {
-                        products.Add(new ProductForClientDto
+                        if(item.ProductImgs.Count() > 0)
                         {
-                            Id = item.Id,
-                            Title = item.Name,
-                            Price = item.Price,
-                            ImgSrc = ""
-                        });
+                            products.Add(new ProductForClientDto
+                            {
+                                Id = item.Id,
+                                Title = item.Name,
+                                Price = item.Price,
+                                ImgSrc = item.ProductImgs.First().Src
+                            });
+
+                        }
+
+                        else
+                        {
+                            products.Add(new ProductForClientDto
+                            {
+                                Id = item.Id,
+                                Title = item.Name,
+                                Price = item.Price
+                            });
+
+                        }
+                        
                     }
 
                     return new Result<List<ProductForClientDto>>()
@@ -71,6 +90,7 @@ namespace XStore.Application.Services.Products.Queries.GetProductsForClient
                     .ThenInclude(p => p.ChildCategories)
                     .Where(p => p.ProductCategory.ParentCategoryId == categoryId)
                     .Include(p => p.ProductFeatures)
+                    .Include(p =>  p.ProductImgs)
                     .ToList();
                 }
 
@@ -80,6 +100,7 @@ namespace XStore.Application.Services.Products.Queries.GetProductsForClient
                                 .Include(p => p.ProductCategory)
                                 .ThenInclude(p => p.ChildCategories)
                                 .Include(p => p.ProductFeatures)
+                                .Include(p => p.ProductImgs)
                                 .ToList();
                 }
             }
@@ -94,6 +115,7 @@ namespace XStore.Application.Services.Products.Queries.GetProductsForClient
                         Id = item.Id,
                         Title = item.Name,
                         Price = item.Price,
+                        ImgSrc = item.ProductImgs.First().Src
                     });
 
                 }
