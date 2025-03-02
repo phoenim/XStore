@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using XStore.Application.Interfaces.Context;
 using XStore.Application.Interfaces.FacadPatterns;
+using XStore.Application.Services.Carts.Facad;
 using XStore.Application.Services.Menus.Facad;
 using XStore.Application.Services.Products.Facad;
 using XStore.Application.Services.Users.Commands.RegisterUser;
@@ -22,6 +23,7 @@ builder.Services.AddScoped<IDataBaseContext, DataBaseContext>();
 builder.Services.AddScoped<IUserFacad, UserFacad>();
 builder.Services.AddScoped<IProductFacad, ProductFacad>();
 builder.Services.AddScoped<IMenuFacad, MenuFacad>();
+builder.Services.AddScoped<ICartFacad, CartFacad>();
 
 builder.Services.AddAuthentication(options =>
 {
