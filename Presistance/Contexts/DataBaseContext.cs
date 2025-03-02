@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using XStore.Domain.Entities.Products;
+using XStore.Domain.Entities.Carts;
 
 namespace XStore.Presistance.Contexts
 {
@@ -22,6 +23,8 @@ namespace XStore.Presistance.Contexts
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductImg> ProductImgs {  get; set; }
         public DbSet<ProductFeature> ProductFeatures { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

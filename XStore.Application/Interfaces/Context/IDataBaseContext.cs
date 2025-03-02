@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using XStore.Domain.Entities.Products;
+using XStore.Domain.Entities.Carts;
 
 namespace XStore.Application.Interfaces.Context
 {
@@ -19,6 +20,8 @@ namespace XStore.Application.Interfaces.Context
         DbSet<Product> Products { get; set; }
         DbSet<ProductImg> ProductImgs { get; set; }
         DbSet<ProductFeature> ProductFeatures { get; set; }
+        DbSet<Cart> Carts { get; set; }
+        DbSet<CartItem> CartItems { get; set; }
 
         int SaveChanges(bool acceptAllChangesOnSuccess);
         int SaveChanges();
