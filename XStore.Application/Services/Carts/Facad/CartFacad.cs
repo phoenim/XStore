@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using XStore.Application.Interfaces.Context;
 using XStore.Application.Interfaces.FacadPatterns;
 using XStore.Application.Services.Carts.Commands.AddNewItemToCart;
+using XStore.Application.Services.Carts.Commands.GetCart;
+using XStore.Application.Services.Carts.Commands.RemoveItemFromCart;
 
 namespace XStore.Application.Services.Carts.Facad
 {
@@ -24,6 +26,24 @@ namespace XStore.Application.Services.Carts.Facad
             get
             {
                 return _addItemToCart = _addItemToCart?? new AddItemToCartService(_context);
+            }
+        }
+
+        private IGetCartService _getCart;
+        public IGetCartService GetCartService
+        {
+            get
+            {
+                return _getCart = _getCart ?? new GetCartService(_context);
+            }
+        }
+
+        private IRemoveItemFromCartService _removeFromCart;
+        public IRemoveItemFromCartService RemoveFromCartService
+        {
+            get
+            {
+                return _removeFromCart = _removeFromCart ?? new RemoveItemFromCartService(_context);
             }
         }
     }
