@@ -5,12 +5,7 @@ using XStore.Application.Interfaces.FacadPatterns;
 using XStore.Application.Services.Carts.Facad;
 using XStore.Application.Services.Menus.Facad;
 using XStore.Application.Services.Products.Facad;
-using XStore.Application.Services.Users.Commands.RegisterUser;
-using XStore.Application.Services.Users.Commands.RemoveUser;
 using XStore.Application.Services.Users.Facad;
-using XStore.Application.Services.Users.Queries.GetRoles;
-using XStore.Application.Services.Users.Queries.GetUsers;
-using XStore.Application.Services.Users.Queries.LoginUser;
 using XStore.Presistance.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -57,16 +52,5 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
-//app.MapControllerRoute(
-//    name: "areas",
-//    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-
-app.MapAreaControllerRoute(
-    name: "MyAreaAdmin",
-    areaName: "Admin",
-    pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
-
-
 
 app.Run();

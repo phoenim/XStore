@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using XStore.Common.Dto;
 
-namespace XStore.Application.Services.Carts.Commands
+namespace XStore.Application.Services.Carts.Commands.AddNewItemToCart
 {
     public interface IAddItemToCartService
     {

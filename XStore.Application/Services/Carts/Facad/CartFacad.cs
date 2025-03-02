@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using XStore.Application.Interfaces.Context;
 using XStore.Application.Interfaces.FacadPatterns;
-using XStore.Application.Services.Carts.Commands;
+using XStore.Application.Services.Carts.Commands.AddNewItemToCart;
 
 namespace XStore.Application.Services.Carts.Facad
 {

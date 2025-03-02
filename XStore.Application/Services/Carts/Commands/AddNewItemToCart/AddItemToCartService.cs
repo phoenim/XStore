@@ -2,7 +2,7 @@
 using XStore.Common.Dto;
 using XStore.Domain.Entities.Carts;
 
-namespace XStore.Application.Services.Carts.Commands
+namespace XStore.Application.Services.Carts.Commands.AddNewItemToCart
 {
     public class AddItemToCartService : IAddItemToCartService
     {
@@ -14,7 +14,7 @@ namespace XStore.Application.Services.Carts.Commands
         }
 
         public Result Execute(long productId, Guid browserId)
-        { 
+        {
             var cart = _context.Carts.Where(c => c.BrowserId == browserId).FirstOrDefault();
 
             if (cart == null)
