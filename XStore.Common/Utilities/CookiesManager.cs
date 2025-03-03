@@ -4,17 +4,17 @@ namespace XStore.Common.Utilities
 {
     public class CookiesManager
     {
-        public static void Add(HttpContext context, string key, string value, int days)
+        public void Add(HttpContext context, string key, string value, int days)
         {
             context.Response.Cookies.Append(key,value, getCookieOptions(context,days));
         }
 
-        public static bool Contains(HttpContext context, string key)
+        public bool Contains(HttpContext context, string key)
         {
             return context.Request.Cookies.ContainsKey(key);
         }
 
-        public static string GetValue (HttpContext context, string key)
+        public string GetValue (HttpContext context, string key)
         {
             string cookieValue;
 
@@ -26,7 +26,23 @@ namespace XStore.Common.Utilities
             return null;
         }
 
-        private static CookieOptions getCookieOptions (HttpContext context, int days)
+        public Guid GetBrowserId (HttpContext context)
+        {
+            var browserId = GetValue(context, "BrowserId");
+
+            if(browserId == null)
+            {
+                browserId = Guid.NewGuid().ToString();
+                Add(context, "BrowserId", browserId, 10);
+            }
+
+            Guid browserGuid;
+            Guid.TryParse(browserId, out browserGuid);
+
+            return browserGuid;
+        }
+
+        private CookieOptions getCookieOptions (HttpContext context, int days)
         {
             return new CookieOptions()
             {

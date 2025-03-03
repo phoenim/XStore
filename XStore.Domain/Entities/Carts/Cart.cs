@@ -16,6 +16,8 @@ namespace XStore.Domain.Entities.Carts
         public virtual User User { get; set; }
         public long? UserId { get; set; }
 
+        public double TotalPrice { get; set; }
+
         public ICollection<CartItem> Items { get; set; }
         
     }

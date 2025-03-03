@@ -115,7 +115,7 @@ namespace XStore.Application.Services.Products.Queries.GetProductsForClient
                         Id = item.Id,
                         Title = item.Name,
                         Price = item.Price,
-                        ImgSrc = item.ProductImgs.First().Src
+                        //ImgSrc = item.ProductImgs.First().Src
                     });
 
                 }

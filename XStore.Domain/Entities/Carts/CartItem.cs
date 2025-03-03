@@ -13,5 +13,8 @@ namespace XStore.Domain.Entities.Carts
         public long ProductId { get; set; }
 
         public int count { get; set; }
+
+        public double PriceForOne  { get; set; }
+        public double PriceForCount { get; set; }
     }
 }

@@ -36,18 +36,24 @@ namespace XStore.Application.Services.Carts.Commands.AddNewItemToCart
             {
                 CartItem newItem = new CartItem()
                 {
+
                     count = 1,
                     CartId = cart.Id,
                     ProductId = productId,
+                    PriceForOne = product.Price,
+                    PriceForCount = product.Price,
 
                 };
                 _context.CartItems.Add(newItem);
+                cart.TotalPrice = newItem.PriceForCount;
                 _context.SaveChanges();
 
             }
             else
             {
                 cartItem.count++;
+                cartItem.PriceForCount += cartItem.PriceForOne;
+                cart.TotalPrice += cartItem.PriceForOne;
                 _context.SaveChanges();
             }
 

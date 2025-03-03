@@ -35,6 +35,7 @@ namespace XStore.Application.Services.Carts.Commands.RemoveItemFromCart
                 
                 if (foundedItem != null)
                 {
+                    foundedCart.TotalPrice -= foundedItem.PriceForCount;
                     _context.CartItems.Remove(foundedItem);
                     _context.SaveChanges();
 
@@ -57,7 +58,11 @@ namespace XStore.Application.Services.Carts.Commands.RemoveItemFromCart
             {
                 if(foundedItem != null)
                 {
+                    var temp = foundedItem.PriceForCount;
+
                     foundedItem.count -= decreasCount;
+                    foundedItem.PriceForCount = foundedItem.count * foundedItem.PriceForOne;
+                    foundedCart.TotalPrice -= temp - foundedItem.PriceForCount;
                     _context.SaveChanges();
 
                     return new Result()

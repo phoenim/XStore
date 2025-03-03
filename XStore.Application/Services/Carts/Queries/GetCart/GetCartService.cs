@@ -37,6 +37,9 @@ namespace XStore.Application.Services.Carts.Commands.GetCart
                 {
                     product = item.Product.Name,
                     count = item.count,
+                    PriceForOne = item.PriceForOne,
+                    PriceForCount = item.PriceForCount,
+                    ProductId = item.ProductId,
                 });
             }
 
@@ -44,7 +47,8 @@ namespace XStore.Application.Services.Carts.Commands.GetCart
             {
                 Data = new CartDto()
                 {
-                    Items = cartItems
+                    Items = cartItems,
+                    TotalPrice= foundedCart.TotalPrice,
                 },
                 IsSuccess = true,
                 Message = "سبد خرید با موفقیت دریافت شد"
